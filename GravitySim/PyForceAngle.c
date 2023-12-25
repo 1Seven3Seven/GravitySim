@@ -38,6 +38,7 @@ static PyTypeObject PyForceAngleType = {
     .tp_basicsize = sizeof(PyForceAngle),
     .tp_itemsize = 0,
     .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_new = PyType_GenericNew,
     .tp_init = (initproc) PyForceAngle_init,
     .tp_members = PyForceAngle_members
 };
