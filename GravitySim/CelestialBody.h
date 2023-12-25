@@ -3,7 +3,8 @@
 
 #include "ForceAngle.h"
 
-typedef struct _CelestialBody {
+typedef struct _CelestialBody
+{
   unsigned int mass;
 
   double  x_position;
