@@ -29,7 +29,7 @@ ForceAngle calculate_force_between(CelestialBody *body_1,
                                    CelestialBody *body_2,
                                    double gravatational_constant);
 
-/// Applies the given force to the internal acceleration over a given change in time.
+/// Applies the given force to the internal acceleration.
 void apply_force(CelestialBody *body, ForceAngle force_angle);
 
 #endif
