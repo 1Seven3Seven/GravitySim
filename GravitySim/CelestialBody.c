@@ -30,7 +30,8 @@ ForceAngle calculate_force_between(CelestialBody *body_1, CelestialBody *body_2,
   return CreateForceAngle(force, angle);
 }
 
-void apply_force(CelestialBody *body, ForceAngle force_angle) {
+void apply_force(CelestialBody *body, ForceAngle force_angle)
+{
   /*
    * F = m * a
    * a = F / m
@@ -38,6 +39,6 @@ void apply_force(CelestialBody *body, ForceAngle force_angle) {
   
   double acceleration = force_angle.force / body->mass;
   
-  body->x_velocity += acceleration * cos(force_angle.angle);
-  body->y_velocity += acceleration * sin(force_angle.angle);
+  body->x_acceleration += acceleration * cos(force_angle.angle);
+  body->y_acceleration += acceleration * sin(force_angle.angle);
 }
