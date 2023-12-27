@@ -40,7 +40,8 @@ static PyMemberDef PyForceAngle_members[] = {
 };
 
 static PyTypeObject PyForceAngleType = {
-        .ob_base = PyVarObject_HEAD_INIT(NULL, 0) .tp_name = "GravitySim.ForceAngle",
+        .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
+        .tp_name = "GravitySim.ForceAngle",
         .tp_basicsize = sizeof(PyForceAngle),
         .tp_itemsize = 0,
         .tp_flags = Py_TPFLAGS_DEFAULT,
