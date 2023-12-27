@@ -5,16 +5,16 @@
 
 typedef struct _CelestialBody
 {
-  unsigned int mass;
+    unsigned int mass;
 
-  double  x_position;
-  double  y_position;
+    double x_position;
+    double y_position;
 
-  double  x_velocity;
-  double  y_velocity;
+    double x_velocity;
+    double y_velocity;
 
-  double  x_acceleration;
-  double  y_acceleration;
+    double x_acceleration;
+    double y_acceleration;
 } CelestialBody;
 
 /// Applies the internal velocity to the position over a given change in time.

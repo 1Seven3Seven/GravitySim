@@ -4,15 +4,15 @@
 /// Contains a force and the angle it acts along.
 typedef struct _ForceAngle
 {
-  double force;
-  double angle;
+    double force;
+    double angle;
 } ForceAngle;
 
 inline
 ForceAngle CreateForceAngle(double force, double angle)
 {
-  ForceAngle force_angle = {force, angle};
-  return force_angle;
+    ForceAngle force_angle = {force, angle};
+    return force_angle;
 }
 
 #endif
