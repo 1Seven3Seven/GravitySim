@@ -34,8 +34,20 @@ PyForceAngle_init(PyForceAngle *self, PyObject *args, PyObject *Py_UNUSED(ignore
 }
 
 static PyMemberDef PyForceAngle_members[] = {
-        {"force", T_DOUBLE, offsetof(PyForceAngle, force_angle) + offsetof(ForceAngle, force), READONLY, NULL},
-        {"angle", T_DOUBLE, offsetof(PyForceAngle, force_angle) + offsetof(ForceAngle, angle), READONLY, NULL},
+        {
+                .name = "force",
+                .type = T_DOUBLE,
+                .offset = offsetof(PyForceAngle, force_angle) + offsetof(ForceAngle, force),
+                .flags = READONLY,
+                .doc = NULL
+        },
+        {
+                .name = "angle",
+                .type = T_DOUBLE,
+                .offset = offsetof(PyForceAngle, force_angle) + offsetof(ForceAngle, angle),
+                .flags = READONLY,
+                .doc = NULL
+        },
         {NULL}
 };
 
