@@ -15,7 +15,7 @@ void apply_acceleration(CelestialBody *body, double delta_time)
   body->y_velocity += body->y_acceleration * delta_time;
 }
 
-ForceAngle calculate_force_between(CelestialBody *body_1, CelestialBody *body_2, double gravatational_constant)
+ForceAngle calculate_force_between(CelestialBody *body_1, CelestialBody *body_2, double gravitational_constant)
 {
   double delta_x = body_2->x_position - body_1->x_position;
   double delta_y = body_2->y_position - body_1->y_position;
@@ -23,7 +23,7 @@ ForceAngle calculate_force_between(CelestialBody *body_1, CelestialBody *body_2,
   double distance_squared = delta_x * delta_x + delta_y * delta_y;
   
   // F = G * m1 * m2 / r^2
-  double force = gravatational_constant * body_1->mass * body_2->mass / distance_squared;
+  double force = gravitational_constant * body_1->mass * body_2->mass / distance_squared;
   
   double angle = atan2(delta_y, delta_x);
   
