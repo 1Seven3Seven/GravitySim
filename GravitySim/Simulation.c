@@ -8,8 +8,6 @@ void simulation_init(Simulation *simulation)
     simulation->num_bodies = 0;
 
     simulation->forces = NULL;
-
-    simulation->delta_time = 0;
 }
 
 int simulation_setup(Simulation *simulation, unsigned int number_bodies)
