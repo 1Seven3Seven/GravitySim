@@ -87,7 +87,7 @@ void simulation_de_init(Simulation *simulation)
     simulation->num_bodies = 0;
 }
 
-void simulation_calculate_forces(Simulation *simulation)
+void simulation_calculate_forces(Simulation *simulation, double gravitational_constant)
 {
     for (unsigned int i = 0; i < simulation->num_bodies; i++)
     {
@@ -95,7 +95,9 @@ void simulation_calculate_forces(Simulation *simulation)
         {
             if (i == j) continue;
 
-            simulation->forces[i][j] = calculate_force_between(&simulation->bodies[i], &simulation->bodies[j]);
+            simulation->forces[i][j] = calculate_force_between(&simulation->bodies[i],
+                                                               &simulation->bodies[j],
+                                                               gravitational_constant);
         }
     }
 }

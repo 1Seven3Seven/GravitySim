@@ -29,7 +29,7 @@ int simulation_setup(Simulation *simulation, unsigned int number_bodies);
 void simulation_de_init(Simulation *simulation);
 
 /// Calculates the forces acting upon each body according to each other body.
-void simulation_calculate_forces(Simulation *simulation);
+void simulation_calculate_forces(Simulation *simulation, double gravitational_constant);
 
 /// Applies the forces calculated in simulation_calculate_forces.
 void simulation_apply_forces(Simulation *simulation);
