@@ -2,6 +2,7 @@ help:
 	@echo "Usage:"
 	@echo "    make install   | to install the GravitySim module"
 	@echo "    make uninstall | to uninstall the GravitySim module"
+	@echo "    make reinstall | to uninstall, remove any build artifacts then install the GravitySim module"
 	@echo "    make clean     | to remove build artifacts"
 
 install:
