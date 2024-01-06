@@ -2,8 +2,9 @@
 
 #include <C:\\Users\\pburg\\AppData\\Local\\Programs\\Python\\Python311\\include\\Python.h>
 
-#include "PyForceAngle.c"
-#include "PyCelestialBody.c"
+#include "PyForceAngle.h"
+#include "PyCelestialBody.h"
+#include "PySimulation.h"
 
 static PyModuleDef GravitySimModule = {
         .m_base = PyModuleDef_HEAD_INIT,
@@ -25,6 +26,10 @@ PyInit_GravitySim(void)
     {
         return NULL;
     }
+    if (PyType_Ready(&PySimulationType) < 0)
+    {
+        return NULL;
+    }
 
     module = PyModule_Create(&GravitySimModule);
     if (module == NULL)
@@ -39,6 +44,12 @@ PyInit_GravitySim(void)
     }
 
     if (PyModule_AddObjectRef(module, "CelestialBody", (PyObject *)&PyCelestialBodyType) < 0)
+    {
+        Py_DECREF(module);
+        return NULL;
+    }
+
+    if (PyModule_AddObjectRef(module, "Simulation", (PyObject *)&PySimulationType) < 0)
     {
         Py_DECREF(module);
         return NULL;
