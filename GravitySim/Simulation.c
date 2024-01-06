@@ -31,7 +31,7 @@ int simulation_setup(Simulation *simulation, unsigned int number_bodies)
         simulation->forces[i] = malloc(sizeof(ForceAngle) * number_bodies);
         if (simulation->forces[i] == NULL)
         {
-            rows_allocated = i;
+            rows_allocated = i + 1;
             goto cleanup;
         }
     }
