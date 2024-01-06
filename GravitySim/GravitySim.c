@@ -1,6 +1,6 @@
 #define PY_SSIZE_T_CLEAN
 
-#include "C:\\Users\\pburg\\AppData\\Local\\Programs\\Python\\Python311\\include\\Python.h"
+#include <C:\\Users\\pburg\\AppData\\Local\\Programs\\Python\\Python311\\include\\Python.h>
 
 #include "PyForceAngle.c"
 #include "PyCelestialBody.c"
