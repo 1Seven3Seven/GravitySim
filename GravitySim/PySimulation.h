@@ -43,7 +43,7 @@ PySimulation_init(PySimulation *self, PyObject *args, PyObject *Py_UNUSED(ignore
     simulation_init(&self->simulation);
     int setup_result = simulation_setup(&self->simulation, number_bodies);
 
-    if (!setup_result)
+    if (setup_result)
     {
         PyErr_SetString(PyExc_RuntimeError, "Failed to set up simulation.");
         return -1;
