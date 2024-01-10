@@ -12,6 +12,7 @@
 
 // My stuff
 #include "Simulation.h"
+#include "PyCelestialBody.h"
 
 typedef struct _PySimulation
 {
@@ -52,6 +53,32 @@ PySimulation_init(PySimulation *self, PyObject *args, PyObject *Py_UNUSED(ignore
     return 0;
 }
 
+static PyObject *
+/*
+ * Get the CelestialBody object at the given index.
+ */
+PySimulation_getitem(PyObject *self, Py_ssize_t i)
+{
+    PySimulation *object = (PySimulation *)self;
+
+    if (i < 0 || i >= object->simulation.num_bodies)
+    {
+        PyErr_SetString(PyExc_IndexError, "Index out of range.");
+        return NULL;
+    }
+
+    PyCelestialBody *py_celestial_body = PyObject_New(PyCelestialBody, &PyCelestialBodyType);
+    if (!py_celestial_body)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "Failed to create CelestialBody object.");
+        return NULL;
+    }
+
+    py_celestial_body->celestial_body = object->simulation.bodies[i];
+
+    return (PyObject *)py_celestial_body;
+}
+
 static PyMemberDef PySimulation_members[] = {
         {
                 .name = "num_bodies",
@@ -62,6 +89,11 @@ static PyMemberDef PySimulation_members[] = {
         },
 };
 
+static PySequenceMethods PySimulation_as_sequence = {
+        .sq_length = NULL,
+        .sq_item = PySimulation_getitem
+};
+
 static PyTypeObject PySimulationType = {
         .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
         .tp_name = "GravitySim.Simulation",
@@ -70,6 +102,7 @@ static PyTypeObject PySimulationType = {
         .tp_flags = Py_TPFLAGS_DEFAULT,
         .tp_doc = PyDoc_STR("Simulation object."),
         .tp_members = PySimulation_members,
+        .tp_as_sequence = &PySimulation_as_sequence,
         .tp_init = (initproc)PySimulation_init,
         .tp_new = PyType_GenericNew,
         .tp_dealloc = (destructor)PySimulation_dealloc,
