@@ -79,6 +79,39 @@ PySimulation_item(PyObject *self, Py_ssize_t i)
     return (PyObject *)py_celestial_body;
 }
 
+static int
+/*
+ * Set the CelestialBody object at the given index.
+ */
+PySimulation_ass_item(PyObject *self, Py_ssize_t i, PyObject *value)
+{
+    PySimulation *object = (PySimulation *)self;
+
+    if (i < 0 || i >= object->simulation.num_bodies)
+    {
+        PyErr_SetString(PyExc_IndexError, "Index out of range.");
+        return -1;
+    }
+
+    if (value == NULL)
+    {
+        PyErr_SetString(PyExc_TypeError, "Item deletion not supported.");
+        return -1;
+    }
+
+    if (!PyObject_TypeCheck(value, &PyCelestialBodyType))
+    {
+        PyErr_SetString(PyExc_TypeError, "Expected a CelestialBody object.");
+        return -1;
+    }
+
+    PyCelestialBody *new_body = (PyCelestialBody *)value;
+
+    object->simulation.bodies[i] = new_body->celestial_body;
+
+    return 0;
+}
+
 static PyMemberDef PySimulation_members[] = {
         {
                 .name = "num_bodies",
@@ -91,7 +124,8 @@ static PyMemberDef PySimulation_members[] = {
 
 static PySequenceMethods PySimulation_as_sequence = {
         .sq_length = NULL,
-        .sq_item = PySimulation_item
+        .sq_item = PySimulation_item,
+        .sq_ass_item = PySimulation_ass_item
 };
 
 static PyTypeObject PySimulationType = {
