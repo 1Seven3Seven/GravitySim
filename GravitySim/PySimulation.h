@@ -112,6 +112,40 @@ PySimulation_ass_item(PyObject *self, Py_ssize_t i, PyObject *value)
     return 0;
 }
 
+static PyObject *
+/*
+ * Get the x and y coordinates of the CelestialObject at the given index.
+ */
+PySimulation_get_coordinates_of(PySimulation *self, PyObject *args, PyObject *Py_UNUSED(ignored))
+{
+    unsigned int index;
+    unsigned int parse_result = PyArg_ParseTuple(args, "I", &index);
+
+    if (!parse_result)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid input argument.");
+        return NULL;
+    }
+
+    if (index >= self->simulation.num_bodies)
+    {
+        PyErr_SetString(PyExc_IndexError, "Index out of range.");
+        return NULL;
+    }
+
+    PyObject *tuple = Py_BuildValue("(dd)",
+                                    self->simulation.bodies[index].x_position,
+                                    self->simulation.bodies[index].y_position);
+
+    if (!tuple)
+    {
+        PyErr_SetString(PyExc_RuntimeError, "Failed to create tuple object.");
+        return NULL;
+    }
+
+    return tuple;
+}
+
 static PyMemberDef PySimulation_members[] = {
     {
         .name = "num_bodies",
@@ -128,6 +162,16 @@ static PySequenceMethods PySimulation_as_sequence = {
     .sq_ass_item = PySimulation_ass_item
 };
 
+static PyMethodDef PySimulation_methods[] = {
+    {
+        .ml_name = "get_coordinates_of",
+        .ml_meth = (PyCFunction)PySimulation_get_coordinates_of,
+        .ml_flags = METH_VARARGS,
+        .ml_doc = NULL
+    },
+    {NULL}
+};
+
 static PyTypeObject PySimulationType = {
     .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
     .tp_name = "GravitySim.Simulation",
@@ -135,6 +179,7 @@ static PyTypeObject PySimulationType = {
     .tp_itemsize = 0,
     .tp_flags = Py_TPFLAGS_DEFAULT,
     .tp_doc = PyDoc_STR("Simulation object."),
+    .tp_methods = PySimulation_methods,
     .tp_members = PySimulation_members,
     .tp_as_sequence = &PySimulation_as_sequence,
     .tp_init = (initproc)PySimulation_init,
