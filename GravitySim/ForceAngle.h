@@ -2,7 +2,7 @@
 #define GRAVITYSIM_FORCEANGLE_H
 
 /**
- * @breif Contains a force and the angle it acts along.
+ * @brief Contains a force and the angle it acts along.
  */
 typedef struct
 {
