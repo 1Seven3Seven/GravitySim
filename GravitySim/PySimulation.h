@@ -113,33 +113,33 @@ PySimulation_ass_item(PyObject *self, Py_ssize_t i, PyObject *value)
 }
 
 static PyMemberDef PySimulation_members[] = {
-        {
-                .name = "num_bodies",
-                .type = T_UINT,
-                .offset = offsetof(PySimulation, simulation) + offsetof(Simulation, num_bodies),
-                .flags = READONLY,
-                .doc = NULL
-        },
+    {
+        .name = "num_bodies",
+        .type = T_UINT,
+        .offset = offsetof(PySimulation, simulation) + offsetof(Simulation, num_bodies),
+        .flags = READONLY,
+        .doc = NULL
+    },
 };
 
 static PySequenceMethods PySimulation_as_sequence = {
-        .sq_length = NULL,
-        .sq_item = PySimulation_item,
-        .sq_ass_item = PySimulation_ass_item
+    .sq_length = NULL,
+    .sq_item = PySimulation_item,
+    .sq_ass_item = PySimulation_ass_item
 };
 
 static PyTypeObject PySimulationType = {
-        .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
-        .tp_name = "GravitySim.Simulation",
-        .tp_basicsize = sizeof(PySimulation),
-        .tp_itemsize = 0,
-        .tp_flags = Py_TPFLAGS_DEFAULT,
-        .tp_doc = PyDoc_STR("Simulation object."),
-        .tp_members = PySimulation_members,
-        .tp_as_sequence = &PySimulation_as_sequence,
-        .tp_init = (initproc)PySimulation_init,
-        .tp_new = PyType_GenericNew,
-        .tp_dealloc = (destructor)PySimulation_dealloc,
+    .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
+    .tp_name = "GravitySim.Simulation",
+    .tp_basicsize = sizeof(PySimulation),
+    .tp_itemsize = 0,
+    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_doc = PyDoc_STR("Simulation object."),
+    .tp_members = PySimulation_members,
+    .tp_as_sequence = &PySimulation_as_sequence,
+    .tp_init = (initproc)PySimulation_init,
+    .tp_new = PyType_GenericNew,
+    .tp_dealloc = (destructor)PySimulation_dealloc,
 };
 
 

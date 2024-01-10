@@ -34,33 +34,33 @@ PyForceAngle_init(PyForceAngle *self, PyObject *args, PyObject *Py_UNUSED(ignore
 }
 
 static PyMemberDef PyForceAngle_members[] = {
-        {
-                .name = "force",
-                .type = T_DOUBLE,
-                .offset = offsetof(PyForceAngle, force_angle) + offsetof(ForceAngle, force),
-                .flags = READONLY,
-                .doc = NULL
-        },
-        {
-                .name = "angle",
-                .type = T_DOUBLE,
-                .offset = offsetof(PyForceAngle, force_angle) + offsetof(ForceAngle, angle),
-                .flags = READONLY,
-                .doc = NULL
-        },
-        {NULL}
+    {
+        .name = "force",
+        .type = T_DOUBLE,
+        .offset = offsetof(PyForceAngle, force_angle) + offsetof(ForceAngle, force),
+        .flags = READONLY,
+        .doc = NULL
+    },
+    {
+        .name = "angle",
+        .type = T_DOUBLE,
+        .offset = offsetof(PyForceAngle, force_angle) + offsetof(ForceAngle, angle),
+        .flags = READONLY,
+        .doc = NULL
+    },
+    {NULL}
 };
 
 static PyTypeObject PyForceAngleType = {
-        .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
-        .tp_name = "GravitySim.ForceAngle",
-        .tp_basicsize = sizeof(PyForceAngle),
-        .tp_itemsize = 0,
-        .tp_flags = Py_TPFLAGS_DEFAULT,
-        .tp_doc = PyDoc_STR("Force Angle object."),
-        .tp_members = PyForceAngle_members,
-        .tp_init = (initproc)PyForceAngle_init,
-        .tp_new = PyType_GenericNew,
+    .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
+    .tp_name = "GravitySim.ForceAngle",
+    .tp_basicsize = sizeof(PyForceAngle),
+    .tp_itemsize = 0,
+    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_doc = PyDoc_STR("Force Angle object."),
+    .tp_members = PyForceAngle_members,
+    .tp_init = (initproc)PyForceAngle_init,
+    .tp_new = PyType_GenericNew,
 };
 
 #endif

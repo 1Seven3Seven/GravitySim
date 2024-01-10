@@ -7,10 +7,10 @@
 #include "PySimulation.h"
 
 static PyModuleDef GravitySimModule = {
-        .m_base = PyModuleDef_HEAD_INIT,
-        .m_name = "GravitySim",
-        .m_doc = PyDoc_STR("A library to simulate gravity."),
-        .m_size = -1
+    .m_base = PyModuleDef_HEAD_INIT,
+    .m_name = "GravitySim",
+    .m_doc = PyDoc_STR("A library to simulate gravity."),
+    .m_size = -1
 };
 
 PyMODINIT_FUNC

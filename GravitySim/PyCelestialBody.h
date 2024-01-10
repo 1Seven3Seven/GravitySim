@@ -139,97 +139,97 @@ PyCelestialBody_apply_force(PyCelestialBody *self, PyObject *args, PyObject *Py_
 }
 
 static PyMemberDef PyCelestialBody_members[] = {
-        {
-                .name = "mass",
-                .type = T_UINT,
-                .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, mass),
-                .flags = READONLY,
-                .doc = NULL
-        },
-        {
-                .name = "x_position",
-                .type = T_DOUBLE,
-                .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, x_position),
-                .flags = READONLY,
-                .doc = NULL
-        },
-        {
-                .name = "y_position",
-                .type = T_DOUBLE,
-                .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, y_position),
-                .flags = READONLY,
-                .doc = NULL
-        },
-        {
-                .name = "x_velocity",
-                .type = T_DOUBLE,
-                .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, x_velocity),
-                .flags = READONLY,
-                .doc = NULL
-        },
-        {
-                .name = "y_velocity",
-                .type = T_DOUBLE,
-                .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, y_velocity),
-                .flags = READONLY,
-                .doc = NULL
-        },
-        {
-                .name = "x_acceleration",
-                .type = T_DOUBLE,
-                .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, x_acceleration),
-                .flags = READONLY,
-                .doc = NULL
-        },
-        {
-                .name = "y_acceleration",
-                .type = T_DOUBLE,
-                .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, y_acceleration),
-                .flags = READONLY,
-                .doc = NULL
-        },
-        {NULL}
+    {
+        .name = "mass",
+        .type = T_UINT,
+        .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, mass),
+        .flags = READONLY,
+        .doc = NULL
+    },
+    {
+        .name = "x_position",
+        .type = T_DOUBLE,
+        .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, x_position),
+        .flags = READONLY,
+        .doc = NULL
+    },
+    {
+        .name = "y_position",
+        .type = T_DOUBLE,
+        .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, y_position),
+        .flags = READONLY,
+        .doc = NULL
+    },
+    {
+        .name = "x_velocity",
+        .type = T_DOUBLE,
+        .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, x_velocity),
+        .flags = READONLY,
+        .doc = NULL
+    },
+    {
+        .name = "y_velocity",
+        .type = T_DOUBLE,
+        .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, y_velocity),
+        .flags = READONLY,
+        .doc = NULL
+    },
+    {
+        .name = "x_acceleration",
+        .type = T_DOUBLE,
+        .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, x_acceleration),
+        .flags = READONLY,
+        .doc = NULL
+    },
+    {
+        .name = "y_acceleration",
+        .type = T_DOUBLE,
+        .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, y_acceleration),
+        .flags = READONLY,
+        .doc = NULL
+    },
+    {NULL}
 };
 
 static PyMethodDef PyCelestialBody_methods[] = {
-        {
-                .ml_name = "apply_velocity",
-                .ml_meth = (PyCFunction)PyCelestialBody_apply_velocity,
-                .ml_flags = METH_VARARGS,
-                .ml_doc = NULL
-        },
-        {
-                .ml_name = "apply_acceleration",
-                .ml_meth = (PyCFunction)PyCelestialBody_apply_acceleration,
-                .ml_flags = METH_VARARGS,
-                .ml_doc = NULL
-        },
-        {
-                .ml_name = "calculate_force_between",
-                .ml_meth = (PyCFunction)PyCelestialBody_calculate_force_between,
-                .ml_flags = METH_VARARGS,
-                .ml_doc = NULL
-        },
-        {
-                .ml_name = "apply_force",
-                .ml_meth = (PyCFunction)PyCelestialBody_apply_force,
-                .ml_flags = METH_VARARGS,
-                .ml_doc = NULL
-        },
-        {NULL}
+    {
+        .ml_name = "apply_velocity",
+        .ml_meth = (PyCFunction)PyCelestialBody_apply_velocity,
+        .ml_flags = METH_VARARGS,
+        .ml_doc = NULL
+    },
+    {
+        .ml_name = "apply_acceleration",
+        .ml_meth = (PyCFunction)PyCelestialBody_apply_acceleration,
+        .ml_flags = METH_VARARGS,
+        .ml_doc = NULL
+    },
+    {
+        .ml_name = "calculate_force_between",
+        .ml_meth = (PyCFunction)PyCelestialBody_calculate_force_between,
+        .ml_flags = METH_VARARGS,
+        .ml_doc = NULL
+    },
+    {
+        .ml_name = "apply_force",
+        .ml_meth = (PyCFunction)PyCelestialBody_apply_force,
+        .ml_flags = METH_VARARGS,
+        .ml_doc = NULL
+    },
+    {NULL}
 };
 
 static PyTypeObject PyCelestialBodyType = {
-        .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
-        .tp_name = "GravitySim.CelestialBody",
-        .tp_basicsize = sizeof(PyCelestialBody),
-        .tp_itemsize = 0,
-        .tp_flags = Py_TPFLAGS_DEFAULT,
-        .tp_doc = PyDoc_STR("Celestial Body object."),
-        .tp_methods = PyCelestialBody_methods,
-        .tp_members = PyCelestialBody_members,
-        .tp_init = (initproc)PyCelestialBody_init,
-        .tp_new = PyType_GenericNew,
+    .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
+    .tp_name = "GravitySim.CelestialBody",
+    .tp_basicsize = sizeof(PyCelestialBody),
+    .tp_itemsize = 0,
+    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_doc = PyDoc_STR("Celestial Body object."),
+    .tp_methods = PyCelestialBody_methods,
+    .tp_members = PyCelestialBody_members,
+    .tp_init = (initproc)PyCelestialBody_init,
+    .tp_new = PyType_GenericNew,
 };
 
 #endif
