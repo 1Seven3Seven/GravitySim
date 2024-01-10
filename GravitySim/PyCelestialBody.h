@@ -25,17 +25,35 @@ typedef struct _PyCelestialBody
 } PyCelestialBody;
 
 static int
-PyCelestialBody_init(PyCelestialBody *self, PyObject *args, PyObject *Py_UNUSED(ignored))
+PyCelestialBody_init(PyCelestialBody *self, PyObject *args, PyObject *kwds)
 {
-    int parse_result = PyArg_ParseTuple(args, "Idd",
-                                        &self->celestial_body.mass,
-                                        &self->celestial_body.x_position,
-                                        &self->celestial_body.y_position);
+    double x_velocity = 0.0;
+    double y_velocity = 0.0;
+
+    static char *kwlist[] = {
+        "",
+        "",
+        "",
+        "x_velocity",
+        "y_velocity",
+        NULL
+    };
+
+    int parse_result = PyArg_ParseTupleAndKeywords(args, kwds, "Idd|dd", kwlist,
+                                                   &self->celestial_body.mass,
+                                                   &self->celestial_body.x_position,
+                                                   &self->celestial_body.y_position,
+                                                   &x_velocity,
+                                                   &y_velocity);
 
     if (!parse_result)
     {
+        PyErr_SetString(PyExc_TypeError, "Invalid inapt arguments.");
         return -1;
     }
+
+    self->celestial_body.x_velocity = x_velocity;
+    self->celestial_body.y_velocity = y_velocity;
 
     return 0;
 }
