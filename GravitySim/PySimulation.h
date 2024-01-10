@@ -146,6 +146,39 @@ PySimulation_get_coordinates_of(PySimulation *self, PyObject *args, PyObject *Py
     return tuple;
 }
 
+static PyObject *
+/*
+ * Performs a single step over the given time slice.
+ */
+PySimulation_step(PySimulation *self, PyObject *args, PyObject *Py_UNUSED(ignored))
+{
+    double delta_time, gravitational_constant;
+
+    int parse_result = PyArg_ParseTuple(args, "dd", &delta_time, &gravitational_constant);
+
+    if (!parse_result)
+    {
+        PyErr_SetString(PyExc_TypeError, "Invalid inapt argument");
+        return NULL;
+    }
+
+    simulation_calculate_forces(
+        &self->simulation,
+        gravitational_constant
+    );
+
+    simulation_apply_forces(
+        &self->simulation
+    );
+
+    simulation_update_positions(
+        &self->simulation,
+        delta_time
+    );
+
+    Py_RETURN_NONE;
+}
+
 static PyMemberDef PySimulation_members[] = {
     {
         .name = "num_bodies",
@@ -166,6 +199,12 @@ static PyMethodDef PySimulation_methods[] = {
     {
         .ml_name = "get_coordinates_of",
         .ml_meth = (PyCFunction)PySimulation_get_coordinates_of,
+        .ml_flags = METH_VARARGS,
+        .ml_doc = NULL
+    },
+    {
+        .ml_name = "step",
+        .ml_meth = (PyCFunction)PySimulation_step,
         .ml_flags = METH_VARARGS,
         .ml_doc = NULL
     },
