@@ -1,14 +1,19 @@
 #ifndef GRAVITYSIM_FORCEANGLE_H
 #define GRAVITYSIM_FORCEANGLE_H
+/// @file
 
 /**
  * @brief Contains a force and the angle it acts along.
  */
-typedef struct
+struct _ForceAngle
 {
+    /// The force.
     double force;
+    /// The angle the force acts along.
     double angle;
-} ForceAngle;
+};
+
+typedef struct _ForceAngle ForceAngle;
 
 /**
  * @brief A simple way to create a ForceAngle struct.
