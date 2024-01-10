@@ -57,7 +57,7 @@ static PyObject *
 /*
  * Get the CelestialBody object at the given index.
  */
-PySimulation_getitem(PyObject *self, Py_ssize_t i)
+PySimulation_item(PyObject *self, Py_ssize_t i)
 {
     PySimulation *object = (PySimulation *)self;
 
@@ -91,7 +91,7 @@ static PyMemberDef PySimulation_members[] = {
 
 static PySequenceMethods PySimulation_as_sequence = {
         .sq_length = NULL,
-        .sq_item = PySimulation_getitem
+        .sq_item = PySimulation_item
 };
 
 static PyTypeObject PySimulationType = {
