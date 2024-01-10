@@ -11,7 +11,7 @@ typedef struct
 } ForceAngle;
 
 /**
- * @breif A simple way to create a ForceAngle struct.
+ * @brief A simple way to create a ForceAngle struct.
  * @param force The force.
  * @param angle The angle.
  * @return The ForceAngle struct.
