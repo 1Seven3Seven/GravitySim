@@ -57,11 +57,9 @@ static PyObject *
 /*
  * Get the CelestialBody object at the given index.
  */
-PySimulation_item(PyObject *self, Py_ssize_t i)
+PySimulation_item(PySimulation *self, Py_ssize_t i)
 {
-    PySimulation *object = (PySimulation *)self;
-
-    if (i < 0 || i >= object->simulation.num_bodies)
+    if (i < 0 || i >= self->simulation.num_bodies)
     {
         PyErr_SetString(PyExc_IndexError, "Index out of range.");
         return NULL;
@@ -74,7 +72,7 @@ PySimulation_item(PyObject *self, Py_ssize_t i)
         return NULL;
     }
 
-    py_celestial_body->celestial_body = object->simulation.bodies[i];
+    py_celestial_body->celestial_body = self->simulation.bodies[i];
 
     return (PyObject *)py_celestial_body;
 }
@@ -83,11 +81,9 @@ static int
 /*
  * Set the CelestialBody object at the given index.
  */
-PySimulation_ass_item(PyObject *self, Py_ssize_t i, PyObject *value)
+PySimulation_ass_item(PySimulation *self, Py_ssize_t i, PyObject *value)
 {
-    PySimulation *object = (PySimulation *)self;
-
-    if (i < 0 || i >= object->simulation.num_bodies)
+    if (i < 0 || i >= self->simulation.num_bodies)
     {
         PyErr_SetString(PyExc_IndexError, "Index out of range.");
         return -1;
@@ -107,7 +103,7 @@ PySimulation_ass_item(PyObject *self, Py_ssize_t i, PyObject *value)
 
     PyCelestialBody *new_body = (PyCelestialBody *)value;
 
-    object->simulation.bodies[i] = new_body->celestial_body;
+    self->simulation.bodies[i] = new_body->celestial_body;
 
     return 0;
 }
