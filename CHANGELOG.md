@@ -11,6 +11,7 @@
       * [Tiny Version 0.2.0 — Creating the Simulation type](#tiny-version-020--creating-the-simulation-type)
     * [Minor Version 0.3 — Implementing collisions](#minor-version-03--implementing-collisions)
       * [Tiny Version 0.3.0 Adding density and size to CelestialBody](#tiny-version-030-adding-density-and-size-to-celestialbody)
+      * [Tiny Version 0.3.1 Improvement to Simulation](#tiny-version-031-improvement-to-simulation)
 <!-- TOC -->
 
 ## Major Version 0 — The Beginning of the initial development
@@ -110,3 +111,17 @@ The `__init__` function now looks like:
 ```python
 def __init__(self, mass, density, x_position, y_position, x_acceleration=0, y_acceleration=0): ...
 ```
+
+#### Tiny Version 0.3.1 Improvement to Simulation
+
+I realised that the way I perform steps is very inefficient.
+
+1. Calculate the force between each body and store it in a matrix.
+2. Loop over the bodies and apply the necessary forces in the matrix.
+
+This leads to the force from body i to body j being calculated twice.
+
+I have removed the forces matrix, and when calculating the forces I apply them immediately flipping the angle when
+applying it to the other body.
+
+A little bit of a tangent, but I felt it was necessary to do.
