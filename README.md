@@ -45,3 +45,7 @@ A simple solution is to have an array that stores which bodies should be updated
 Or have this stored in the body struct.  
 Or I could go the dynamic array route and reallocate and move the data around when necessary.  
 But I feel like an in-use array would be the easiest for now.  
+
+Actually, now that I think about, I am going to do something like a vector.  
+If a body is now not in use, then I swap it with one in use at the end.  
+This means that all the in use bodies are at the beginning of the array, whereas all the not in use ones are at the end.  
