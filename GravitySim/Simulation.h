@@ -11,6 +11,9 @@ typedef struct _Simulation
 
     /// The number of bodies in the simulation.
     unsigned int num_bodies;
+
+    /// The number of bodies being updated in the simulation.
+    unsigned int num_in_use_bodies;
 } Simulation;
 
 /// Initialises the simulation struct.
@@ -30,5 +33,8 @@ void simulation_calculate_and_apply_forces(Simulation *simulation, double gravit
 
 /// Applies the acceleration then the velocity of all bodies to update their positions over some delta time.
 void simulation_update_positions(Simulation *simulation, double delta_time);
+
+/// Handles any collision between bodies by combining the two offending bodies into one.
+void handle_collisions(Simulation *simulation);
 
 #endif
