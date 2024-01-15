@@ -12,6 +12,7 @@
     * [Minor Version 0.3 — Implementing collisions](#minor-version-03--implementing-collisions)
       * [Tiny Version 0.3.0 Adding density and size to CelestialBody](#tiny-version-030-adding-density-and-size-to-celestialbody)
       * [Tiny Version 0.3.1 Improvement to Simulation](#tiny-version-031-improvement-to-simulation)
+      * [Tiny Version 0.3.2 Implementing Collisions to C Simulation](#tiny-version-032-implementing-collisions-to-c-simulation)
 <!-- TOC -->
 
 ## Major Version 0 — The Beginning of the initial development
@@ -125,3 +126,25 @@ I have removed the forces matrix, and when calculating the forces I apply them i
 applying it to the other body.
 
 A little bit of a tangent, but I felt it was necessary to do.
+
+#### Tiny Version 0.3.2 Implementing Collisions to C Simulation
+
+We have a new function `handle_collisions` that does what it says on the tin.  
+Collisions are handled by creating a new body with an averaged position, velocity and density.
+
+This was one of the most challenging pieces of code to work out due to restraints I placed upon myself.  
+Namely, that I did not want to have any dynamically allocated memory in the function.  
+This meant that everything was done only using the bodies' array.
+
+Well, because collisions reduce the number of bodies in the simulation, the simulation now tracks the number of bodies
+actually being updated.  
+The bodies not being updated are moved to the end of the array.    
+This does mean that, when looping over the bodies in between steps, the bodies may not be in the same positions.
+
+The collision check is not done in the most elegant of ways, namely a double for loop, but it was the simplest method,
+and will be improved later on.
+
+Hopefully it all works when I add it to the python type.  
+Hopefully...
+
+Good luck future me.
