@@ -158,13 +158,9 @@ PySimulation_step(PySimulation *self, PyObject *args, PyObject *Py_UNUSED(ignore
         return NULL;
     }
 
-    simulation_calculate_forces(
+    simulation_calculate_and_apply_forces(
         &self->simulation,
         gravitational_constant
-    );
-
-    simulation_apply_forces(
-        &self->simulation
     );
 
     simulation_update_positions(
