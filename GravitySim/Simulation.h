@@ -11,9 +11,6 @@ typedef struct _Simulation
 
     /// The number of bodies in the simulation.
     unsigned int num_bodies;
-
-    /// A dynamically allocated matrix of the forces between celestial bodies.
-    ForceAngle **forces;
 } Simulation;
 
 /// Initialises the simulation struct.
@@ -28,11 +25,8 @@ int simulation_setup(Simulation *simulation, unsigned int number_bodies);
 /// Frees any allocated memory and returns the state to just after simulation_init is called.
 void simulation_de_init(Simulation *simulation);
 
-/// Calculates the forces acting upon each body according to each other body.
-void simulation_calculate_forces(Simulation *simulation, double gravitational_constant);
-
-/// Applies the forces calculated in simulation_calculate_forces.
-void simulation_apply_forces(Simulation *simulation);
+/// Calculates and applies the forces between CelestialBody structs in one step.
+void simulation_calculate_and_apply_forces(Simulation *simulation, double gravitational_constant);
 
 /// Applies the acceleration then the velocity of all bodies to update their positions over some delta time.
 void simulation_update_positions(Simulation *simulation, double delta_time);
