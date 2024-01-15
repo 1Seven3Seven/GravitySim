@@ -36,3 +36,12 @@ radius = sqrt(mass / (density * pi))
 ```
 
 The radius only needs to be calculated each time the mass changes.
+
+### Working out collisions 2
+
+The simulation is set up so that the number of bodies is constant.  
+But if bodies can combine when colliding, then the number of bodies is not constant.  
+A simple solution is to have an array that stores which bodies should be updated.
+Or have this stored in the body struct.  
+Or I could go the dynamic array route and reallocate and move the data around when necessary.  
+But I feel like an in-use array would be the easiest for now.  
