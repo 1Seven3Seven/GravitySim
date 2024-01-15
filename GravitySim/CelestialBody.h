@@ -9,26 +9,50 @@
  */
 struct _CelestialBody
 {
-    /// The mass of this body.
+    /// @brief The mass of this body.
     unsigned int mass;
 
-    /// The x position of this body.
+    /// @brief The density of this body.
+    double density;
+
+    /// @brief The size of this body.
+    double size;
+
+    /// @brief The x position of this body.
     double x_position;
-    /// The y position of this body.
+    /// @brief The y position of this body.
     double y_position;
 
-    /// The x velocity of this body.
+    /// @brief The x velocity of this body.
     double x_velocity;
-    /// The y velocity of this body.
+    /// @brief The y velocity of this body.
     double y_velocity;
 
-    /// The instantaneous x acceleration of this body.
+    /// @brief The instantaneous x acceleration of this body.
     double x_acceleration;
-    /// The instantaneous y acceleration of this body.
+    /// @brief The instantaneous y acceleration of this body.
     double y_acceleration;
 };
 
 typedef struct _CelestialBody CelestialBody;
+
+/**
+ * @brief Sets up the celestial body to have the given mass and density.
+ * @param mass The mass of the celestial body.
+ * @param density The density of the celestial body.
+ *
+ * @paragraph Specifics
+ * Sets the mass and density of the given CelestialBody struct.
+ * The size is then calculated based on the mass and density.
+ * The position, velocity and acceleration are all zeroed.
+ */
+void setup_celestial_body(CelestialBody *body, unsigned int mass, double density);
+
+/**
+ * @brief Recalculates the size of the given body, only needs to be called if the mass changed.
+ * @param body The body whose size is being recalculated.
+ */
+void recalculate_size(CelestialBody *body);
 
 /**
  * @brief Applies the internal velocity to the position over a given change in time.

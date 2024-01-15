@@ -1,7 +1,29 @@
 #include "CelestialBody.h"
 #include "ForceAngle.h"
 
+#define _USE_MATH_DEFINES
+
 #include <math.h>
+
+void setup_celestial_body(CelestialBody *body, unsigned int mass, double density)
+{
+    body->mass = mass;
+    body->density = density;
+
+    body->size = sqrt(mass / (density * M_PI));
+
+    body->x_position = 0;
+    body->y_position = 0;
+    body->x_velocity = 0;
+    body->y_velocity = 0;
+    body->x_acceleration = 0;
+    body->y_acceleration = 0;
+}
+
+void recalculate_size(CelestialBody *body)
+{
+    body->size = sqrt(body->mass / (body->density * M_PI));
+}
 
 void apply_velocity(CelestialBody *body, double delta_time)
 {
