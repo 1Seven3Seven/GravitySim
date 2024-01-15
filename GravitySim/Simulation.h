@@ -31,13 +31,4 @@ void simulation_calculate_and_apply_forces(Simulation *simulation, double gravit
 /// Applies the acceleration then the velocity of all bodies to update their positions over some delta time.
 void simulation_update_positions(Simulation *simulation, double delta_time);
 
-/// Saves the current state of the simulation to a file at the given file name.
-/// Returns 0 on success, negative number on failure.
-///
-/// \t -1 on failure to open file.
-/// \t -2 on failure to write to file.
-///
-/// This is written rather badly and is probably system dependant.
-int simulation_save_state(Simulation *simulation, const char *file_name);
-
 #endif
