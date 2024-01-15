@@ -25,6 +25,9 @@ typedef struct _PyCelestialBody
 } PyCelestialBody;
 
 static int
+/*
+ * __init__(self, mass, density, x_position, y_position, x_acceleration=0, y_acceleration=0)
+ */
 PyCelestialBody_init(PyCelestialBody *self, PyObject *args, PyObject *kwds)
 {
     double x_velocity = 0.0;
@@ -34,13 +37,15 @@ PyCelestialBody_init(PyCelestialBody *self, PyObject *args, PyObject *kwds)
         "",
         "",
         "",
+        "",
         "x_velocity",
         "y_velocity",
         NULL
     };
 
-    int parse_result = PyArg_ParseTupleAndKeywords(args, kwds, "Idd|dd", kwlist,
+    int parse_result = PyArg_ParseTupleAndKeywords(args, kwds, "Iddd|dd", kwlist,
                                                    &self->celestial_body.mass,
+                                                   &self->celestial_body.density,
                                                    &self->celestial_body.x_position,
                                                    &self->celestial_body.y_position,
                                                    &x_velocity,
@@ -54,6 +59,8 @@ PyCelestialBody_init(PyCelestialBody *self, PyObject *args, PyObject *kwds)
 
     self->celestial_body.x_velocity = x_velocity;
     self->celestial_body.y_velocity = y_velocity;
+
+    recalculate_size(&self->celestial_body);
 
     return 0;
 }
@@ -161,6 +168,20 @@ static PyMemberDef PyCelestialBody_members[] = {
         .name = "mass",
         .type = T_UINT,
         .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, mass),
+        .flags = READONLY,
+        .doc = NULL
+    },
+    {
+        .name = "density",
+        .type = T_DOUBLE,
+        .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, density),
+        .flags = READONLY,
+        .doc = NULL
+    },
+    {
+        .name = "size",
+        .type = T_DOUBLE,
+        .offset = offsetof(PyCelestialBody, celestial_body) + offsetof(CelestialBody, size),
         .flags = READONLY,
         .doc = NULL
     },
