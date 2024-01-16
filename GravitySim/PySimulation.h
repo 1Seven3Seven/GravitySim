@@ -183,7 +183,7 @@ static PyMemberDef PySimulation_members[] = {
     {
         .name = "num_bodies",
         .type = T_UINT,
-        .offset = offsetof(PySimulation, simulation) + offsetof(Simulation, num_bodies),
+        .offset = offsetof(PySimulation, simulation) + offsetof(Simulation, num_in_use_bodies),
         .flags = READONLY,
         .doc = NULL
     },
