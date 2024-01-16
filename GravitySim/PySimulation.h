@@ -177,6 +177,19 @@ PySimulation_step(PySimulation *self, PyObject *args, PyObject *Py_UNUSED(ignore
         delta_time
     );
 
+    simulation_handle_collisions(&self->simulation);
+
+    Py_RETURN_NONE;
+}
+
+static PyObject *
+/*
+ * Handles any collisions that are currently occurring.
+ */
+PySimulation_handle_collisions(PySimulation *self)
+{
+    simulation_handle_collisions(&self->simulation);
+
     Py_RETURN_NONE;
 }
 
@@ -207,6 +220,12 @@ static PyMethodDef PySimulation_methods[] = {
         .ml_name = "step",
         .ml_meth = (PyCFunction)PySimulation_step,
         .ml_flags = METH_VARARGS,
+        .ml_doc = NULL
+    },
+    {
+        .ml_name = "handle_collisions",
+        .ml_meth = (PyCFunction)PySimulation_handle_collisions,
+        .ml_flags = METH_NOARGS,
         .ml_doc = NULL
     },
     {NULL}
