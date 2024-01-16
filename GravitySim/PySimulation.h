@@ -145,6 +145,7 @@ PySimulation_get_coordinates_of(PySimulation *self, PyObject *args, PyObject *Py
 static PyObject *
 /*
  * Performs a single step over the given time slice.
+ * step(delta_time, gravitational_constant)
  */
 PySimulation_step(PySimulation *self, PyObject *args, PyObject *Py_UNUSED(ignored))
 {
@@ -154,7 +155,7 @@ PySimulation_step(PySimulation *self, PyObject *args, PyObject *Py_UNUSED(ignore
 
     if (!parse_result)
     {
-        PyErr_SetString(PyExc_TypeError, "Invalid inapt argument");
+        PyErr_SetString(PyExc_TypeError, "Invalid inapt arguments.");
         return NULL;
     }
 
