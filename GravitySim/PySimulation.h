@@ -158,6 +158,14 @@ PySimulation_step(PySimulation *self, PyObject *args, PyObject *Py_UNUSED(ignore
         return NULL;
     }
 
+    // Zero the acceleration
+    // This is instantaneous acceleration and is calculated separately each step
+    for (unsigned int i = 0; i < self->simulation.num_in_use_bodies; i++)
+    {
+        self->simulation.bodies[i].x_acceleration = 0;
+        self->simulation.bodies[i].y_acceleration = 0;
+    }
+
     simulation_calculate_and_apply_forces(
         &self->simulation,
         gravitational_constant
