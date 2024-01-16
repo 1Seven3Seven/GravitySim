@@ -129,7 +129,7 @@ A little bit of a tangent, but I felt it was necessary to do.
 
 #### Tiny Version 0.3.2 Implementing Collisions to C Simulation
 
-We have a new function `handle_collisions` that does what it says on the tin.  
+We have a new function `simulation_handle_collisions` that does what it says on the tin.  
 Collisions are handled by creating a new body with an averaged position, velocity and density.
 
 This was one of the most challenging pieces of code to work out due to restraints I placed upon myself.  

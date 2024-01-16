@@ -115,7 +115,7 @@ static CelestialBody combine_bodies(Simulation *simulation, unsigned int i, unsi
  * Finally, we then re-do the collision checks for the combined bodies as their positions and sizes have changed.
  * This is repeated until there are no new collisions and thus combinations.
  */
-void handle_collisions(Simulation *simulation)
+void simulation_handle_collisions(Simulation *simulation)
 {
     unsigned int bodies_to_update = simulation->num_in_use_bodies;
 

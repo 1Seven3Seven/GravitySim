@@ -35,6 +35,6 @@ void simulation_calculate_and_apply_forces(Simulation *simulation, double gravit
 void simulation_update_positions(Simulation *simulation, double delta_time);
 
 /// Handles any collision between bodies by combining the two offending bodies into one.
-void handle_collisions(Simulation *simulation);
+void simulation_handle_collisions(Simulation *simulation);
 
 #endif
