@@ -1,18 +1,21 @@
 # Changelog
 
 <!-- TOC -->
+
 * [Changelog](#changelog)
-  * [Major Version 0 — The Beginning of the initial development](#major-version-0--the-beginning-of-the-initial-development)
-    * [Minor Version 0.1 — Creating the most basic types to be used](#minor-version-01--creating-the-most-basic-types-to-be-used)
-      * [Tiny Version 0.1(.0) — Creating the ForceAngle type](#tiny-version-010--creating-the-forceangle-type)
-      * [Tiny Version 0.1.1 — Creating the CelestialBody type](#tiny-version-011--creating-the-celestialbody-type)
-      * [Tiny Version 0.1.2 — QOL changes to CelestialBody](#tiny-version-012--qol-changes-to-celestialbody)
-    * [Minor Version 0.2 — Creating the simulation handler](#minor-version-02--creating-the-simulation-handler)
-      * [Tiny Version 0.2.0 — Creating the Simulation type](#tiny-version-020--creating-the-simulation-type)
-    * [Minor Version 0.3 — Implementing collisions](#minor-version-03--implementing-collisions)
-      * [Tiny Version 0.3.0 Adding density and size to CelestialBody](#tiny-version-030-adding-density-and-size-to-celestialbody)
-      * [Tiny Version 0.3.1 Improvement to Simulation](#tiny-version-031-improvement-to-simulation)
-      * [Tiny Version 0.3.2 Implementing Collisions to C Simulation](#tiny-version-032-implementing-collisions-to-c-simulation)
+    * [Major Version 0 — The Beginning of the initial development](#major-version-0--the-beginning-of-the-initial-development)
+        * [Minor Version 0.1 — Creating the most basic types to be used](#minor-version-01--creating-the-most-basic-types-to-be-used)
+            * [Tiny Version 0.1(.0) — Creating the ForceAngle type](#tiny-version-010--creating-the-forceangle-type)
+            * [Tiny Version 0.1.1 — Creating the CelestialBody type](#tiny-version-011--creating-the-celestialbody-type)
+            * [Tiny Version 0.1.2 — QOL changes to CelestialBody](#tiny-version-012--qol-changes-to-celestialbody)
+        * [Minor Version 0.2 — Creating the simulation handler](#minor-version-02--creating-the-simulation-handler)
+            * [Tiny Version 0.2.0 — Creating the Simulation type](#tiny-version-020--creating-the-simulation-type)
+        * [Minor Version 0.3 — Implementing collisions](#minor-version-03--implementing-collisions)
+            * [Tiny Version 0.3.0 Adding density and size to CelestialBody](#tiny-version-030-adding-density-and-size-to-celestialbody)
+            * [Tiny Version 0.3.1 Improvement to Simulation](#tiny-version-031-improvement-to-simulation)
+            * [Tiny Version 0.3.2 Implementing Collisions to C Simulation](#tiny-version-032-implementing-collisions-to-c-simulation)
+            * [Tiny Version 0.3.3 Implementing Collisions to Python Simulation type](#tiny-version-033-implementing-collisions-to-python-simulation-type)
+
 <!-- TOC -->
 
 ## Major Version 0 — The Beginning of the initial development
@@ -148,3 +151,20 @@ Hopefully it all works when I add it to the python type.
 Hopefully...
 
 Good luck future me.
+
+#### Tiny Version 0.3.3 Implementing Collisions to Python Simulation type
+
+The `step` function now handles collisions after handling forces and updating positions.  
+There is also a new function `handle_collisions` that can be called manually.  
+This exists mainly because when setting up a simulation with 1000 random bodies, some of them would have the same
+position causing a crash.  
+Handling collisions manually after setting up the bodies is an easy way to fix this.  
+Too lazy to set up in a way to avoid same positions.
+
+But hey, it all works nicely.  
+There appears to be nothing wrong with the implementation of handling collisions.
+
+A small unrelated change that I also did is that `num_bodies` in the python type no longer refers to the length of
+the `bodies` array in the underlying c code.  
+Instead, it refers to `num_bodies_in_use` in the c code, this is mainly so that when iterating over the simulation
+bodies, you do not handle now unused bodies.  
