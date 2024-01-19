@@ -1,5 +1,5 @@
-#ifndef GRAVITYSIM_QUADTREE_H
-#define GRAVITYSIM_QUADTREE_H
+#ifndef GRAVITYSIM_QUADTREENODE_H
+#define GRAVITYSIM_QUADTREENODE_H
 
 /*
  * Prefixes:
@@ -134,4 +134,4 @@ int QTN_subdivide_leaf(QuadTreeNode *node);
  */
 int QTN_free_branch(QuadTreeNode *node);
 
-#endif //GRAVITYSIM_QUADTREE_H
+#endif //GRAVITYSIM_QUADTREENODE_H
