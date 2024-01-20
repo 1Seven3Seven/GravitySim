@@ -56,6 +56,72 @@ int QTN_free_leaf(QuadTreeNode *node)
     return 0;
 }
 
+static inline int
+/**
+ * Checks if the given coordinates exist inside the given node
+ */
+coordinates_in_node(QuadTreeNode *node, double x, double y)
+{
+    if (node->x - node->extent < x && x < node->x + node->extent)
+    {
+        if (node->y - node->extent < y && y < node->y + node->extent)
+        {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+static inline int
+/**
+ * Checks if data can be added safely into the given node without needing to allocate more space.
+ */
+space_available_in_node(QuadTreeNode *node)
+{
+    if (node->data_in_use < node->data_len) return 1;
+
+    return 0;
+}
+
+int QTN_add_data_to_leaf(QuadTreeNode *node, int data, double x, double y, int allow_resize)
+{
+    // Make sure adding to leaf
+    if (node->type != _Leaf) return -1;
+
+    // Check leaf can contain data
+    if (!coordinates_in_node(node, x, y)) return -2;
+
+    // Check if there is space
+    if (!space_available_in_node(node))
+    {
+        if (!allow_resize) return -3;
+
+        // Resize time, resize to double of the current length
+        _QuadTreeNodeData *new_data = realloc(node->data, sizeof(_QuadTreeNodeData) * node->data_len * 2);
+
+        if (new_data == NULL) return -4;
+
+        // Success
+        node->data_len *= 2;
+        node->data = new_data;
+    }
+
+    // Create the data struct
+    _QuadTreeNodeData data_struct = {
+        .data = data,
+        .x = x,
+        .y = y,
+    };
+
+    // Add the data
+    node->data[node->data_in_use] = data_struct;
+    node->data_in_use++;
+
+    // All done
+    return 0;
+}
+
 static inline void
 /**
  * Helper function for QTN_subdivide_leaf.
@@ -163,7 +229,7 @@ int QTN_free_branch(QuadTreeNode *node)
         // Free each child
         for (int i = 0; i < 4; i++)
         {
-            QuadTreeNode *child_node = node->children[i];
+            QuadTreeNode *child_node = &node->children[i];
 
             switch (child_node->type)
             {
@@ -187,4 +253,3 @@ int QTN_free_branch(QuadTreeNode *node)
 
     return 0;
 }
-

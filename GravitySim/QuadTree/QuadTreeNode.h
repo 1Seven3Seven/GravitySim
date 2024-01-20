@@ -99,6 +99,26 @@ int QTN_setup_leaf(QuadTreeNode *node, double x, double y, double extent, unsign
 int QTN_free_leaf(QuadTreeNode *node);
 
 /**
+ * @brief Adds the given data to the given leaf node using the x and y coordinates.
+ *
+ * @param node The leaf node to add the data to.
+ * @param data The data to add to the node.
+ * @param x The x coordinate to add the data.
+ * @param y The y coordinate to add the data.
+ * @param allow_resize Allows this function to resize the data array if there is not enough space.
+ *
+ * @retval 0 on success.
+ * @retval -1 on failure due to not receiving a leaf node.
+ * @retval -2 on failure due to coordinates not existing in given leaf node.
+ * @retval -3 on failure due to running out of space and being unable to resize.
+ * @retval -4 on failure due to memory allocation error.
+ *
+ * @details
+ * In the case of failure, the node will remain unchanged.
+ */
+int QTN_add_data_to_leaf(QuadTreeNode *node, int data, double x, double y, int allow_resize);
+
+/**
  * @brief Converts the given leaf node into a branch node and moves the data into the appropriate children.
  *
  * @param node The leaf node to convert to a branch.
