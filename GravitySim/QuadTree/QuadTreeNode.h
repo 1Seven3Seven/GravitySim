@@ -73,7 +73,7 @@ void QTN_init(QuadTreeNode *node);
  * @param x The x coordinate of the center of the node.
  * @param y The y coordinate of the center of the node.
  * @param extent Half the width and height of the node.
- * @param data_len The maximum number of data entries before subdividing.
+ * @param data_len The initial length of the data array.
  *
  * @retval 0 on success.
  * @retval -1 on failure due to memory allocation error.
