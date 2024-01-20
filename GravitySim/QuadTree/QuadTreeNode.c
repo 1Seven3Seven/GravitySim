@@ -120,7 +120,7 @@ int QTN_subdivide_leaf(QuadTreeNode *node)
     if (result) goto cleanup;
 
     // Now move this node's children appropriately
-    for (int i = 0; i < node->data_in_use; i++)
+    for (unsigned int i = 0; i < node->data_in_use; i++)
     {
         add_data_to_child(
             node,
